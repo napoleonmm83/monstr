@@ -1,3 +1,22 @@
+<?php
+require_once ("config.php");
+
+if(isset($_GET['save'])) {
+  $save = $_GET['save'];
+  if($save == 'event') {
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $title = $_POST['title'];
+    $name = $_POST['name'];
+
+
+  $statement = $pdo->prepare("INSERT INTO event (	date, time, title, name) VALUES (:date, :time, :title, :name)");
+  $result = $statement->execute(array('date' => $date,'time' => $time,'title' => $title,'name' => $name	));
+  }
+}
+
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,13 +30,28 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Admin Bereich</h1>
+    <nav class="navbar navbar-expand-sm bg-light">
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Event Editor</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Eventübersicht</a>
+    </li>
+
+  </ul>
+
+</nav>
+
 
     <div class="container">
 
         <div class="row justify-content-center">
-      <div class="col-4">
-        <form>
+      <div class="col-8">
+          <h1>Event eintragen</h1>
+        <form action="admin.php?save=event" method="post">
           <div class="form-group">
             <label for="exampleInputEmail1">Datum</label>
             <input type="date" class="form-control" id="date" name="date"  >
@@ -30,13 +64,15 @@
     <label for="exampleInputPassword1">Titel</label>
     <input type="text" class="form-control" id="title" name="title" placeholder="Titel">
   </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+  </div>
 
   <button type="submit" class="btn btn-primary">Senden</button>
 </form>
       </div>
-      <div class="col-4">
-        One of two columns
-      </div>
+
     </div>
 
     <!-- Optional JavaScript -->
