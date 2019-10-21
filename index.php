@@ -1,3 +1,41 @@
+<?php
+
+$heute = date("d.m.Y");
+
+function GetCurrentWeekDates()
+{
+    if (date('D') != 'Mon') {
+        $startdate = date('d.m.Y', strtotime('last Monday'));
+    } else {
+        $startdate = date('d.m.Y');
+    }
+
+//always next saturday
+    if (date('D') != 'Sat') {
+        $enddate = date('d.m.Y', strtotime('next Saturday'));
+    } else {
+        $enddate = date('d.m.Y');
+    }
+
+    $DateArray = array();
+    $timestamp = strtotime($startdate);
+    while ($startdate <= $enddate) {
+        $startdate = date('d.m.Y', $timestamp);
+        $DateArray[] = $startdate;
+        $timestamp = strtotime('+1 days', strtotime($startdate));
+    }
+    return $DateArray;
+}
+
+
+$dates = GetCurrentWeekDates();
+$dates1 = array_shift($dates);
+$dates2 = array_shift($dates);
+$dates3 = array_shift($dates);
+$dates4 = array_shift($dates);
+$dates5 = array_shift($dates);
+
+ ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,26 +55,31 @@
   <body>
 
     <div class="container-fluid ">
-      <div class="row" style="height:6vh;"  >
+      <div class="row" style="height:12vh;"  >
     <div class="col-sm border">
       <h1 class="text-center" >Montag</h1>
+      <h5 class="text-center" ><?php echo $dates1;  ?></h5>
     </div>
     <div class="col-sm border">
     <h1 class="text-center" > Dienstag</h1>
+    <h5 class="text-center" ><?php echo $dates2;  ?></h5>
     </div>
     <div class="col-sm border">
       <h1 class="text-center" >Mittwoch</h1>
+      <h5 class="text-center" ><?php echo $dates3;  ?></h5>
     </div>
     <div class="col-sm border">
     <h1 class="text-center" >  Donnerstag</h1>
+    <h5 class="text-center" ><?php echo $dates4;  ?></h5>
     </div>
     <div class="col-sm border">
     <h1 class="text-center" >  Freitag</h1>
+    <h5 class="text-center" ><?php echo $dates5;  ?></h5>
     </div>
   </div>
 
 
-  <div style="height:86vh;"class="row">
+  <div style="height:80vh;"class="row">
 <div  class="col-sm border ">
 <p>montag</p>
 </div>
