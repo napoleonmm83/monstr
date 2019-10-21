@@ -118,6 +118,7 @@ $class_boring_monster5 = "";
  ?>
 <!doctype html>
 <html lang="en">
+<meta http-equiv="refresh" content="300" />
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -158,7 +159,17 @@ $class_boring_monster5 = "";
 
   .bg-card{
     background-color: #ff8a65 !important;
+
   }
+
+  .bg-card-active{
+    background-color: #ff8a65 !important;
+    background-image: url('monster_happy.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+
 
   .headerdate{
     background-color: #ffe082 !important;
@@ -208,7 +219,15 @@ $query = $pdo->prepare("SELECT * FROM event WHERE date = :date");
 $query->execute(array('date' => $form_dates1));
 $event = $query->fetchAll();
 foreach( $event as $row ) {
-echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
+
+$timenow = date("H");
+$timeevent =  date("H", strtotime($row['time']));
+if ($timenow == $timeevent ){
+  $monstrhappy = "bg-card-active";
+} else {
+  $monstrhappy = "";
+}
+echo   "<div class='card text-white bg-card  border-3 mb-2  ".$monstrhappy."  '>\n";
 echo   "<div class='card-body'>\n";
 echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
 echo   "<h5 class='card-text'>".$row['name']."</h5>\n";
@@ -224,6 +243,13 @@ echo   "</div>\n";
   $query->execute(array('date' => $form_dates2));
   $event = $query->fetchAll();
   foreach( $event as $row ) {
+    $timenow = date("H");
+    $timeevent =  date("H", strtotime($row['time']));
+    if ($timenow == $timeevent ){
+      $monstrhappy = "bg-card-active";
+    } else {
+      $monstrhappy = "";
+    }
     echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
     echo   "<div class='card-body'>\n";
     echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
@@ -240,6 +266,13 @@ echo   "</div>\n";
   $query->execute(array('date' => $form_dates3));
   $event = $query->fetchAll();
   foreach( $event as $row ) {
+    $timenow = date("H");
+    $timeevent =  date("H", strtotime($row['time']));
+    if ($timenow == $timeevent ){
+      $monstrhappy = "bg-card-active";
+    } else {
+      $monstrhappy = "";
+    }
     echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
     echo   "<div class='card-body'>\n";
     echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
@@ -256,6 +289,13 @@ echo   "</div>\n";
   $query->execute(array('date' => $form_dates4));
   $event = $query->fetchAll();
   foreach( $event as $row ) {
+    $timenow = date("H");
+    $timeevent =  date("H", strtotime($row['time']));
+    if ($timenow == $timeevent ){
+      $monstrhappy = "bg-card-active";
+    } else {
+      $monstrhappy = "";
+    }
     echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
     echo   "<div class='card-body'>\n";
     echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
@@ -272,6 +312,13 @@ echo   "</div>\n";
   $query->execute(array('date' => $form_dates5));
   $event = $query->fetchAll();
   foreach( $event as $row ) {
+    $timenow = date("H");
+    $timeevent =  date("H", strtotime($row['time']));
+    if ($timenow == $timeevent ){
+      $monstrhappy = "bg-card-active";
+    } else {
+      $monstrhappy = "";
+    }
     echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
     echo   "<div class='card-body'>\n";
     echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
@@ -289,13 +336,13 @@ echo   "</div>\n";
         <div class="container text-center">
           <div class="row">
              <div class="col-sm">
-            <h3>  <?php echo $heute;  ?></h3>
+            <h3 style="color:#b2ff59;">  <?php echo $heute;  ?></h3>
              </div>
              <div class="col-sm">
                 <h5>Copyright &copy; martini.digital</h5>
              </div>
              <div class="col-sm">
-                 <h3 id="txt"></h3>
+                 <h3 style="color:#1e88e5;" id="txt"></h3>
              </div>
            </div>
 

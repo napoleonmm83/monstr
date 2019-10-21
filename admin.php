@@ -10,7 +10,7 @@ if(isset($_GET['save'])) {
     $name = $_POST['name'];
 
 
-  $statement = $pdo->prepare("INSERT INTO event (	date, time, title, name) VALUES (:date, :time, :title, :name)");
+  $statement = $pdo->prepare("INSERT INTO event (date, time, title, name) VALUES (:date, :time, :title, :name)");
   $result = $statement->execute(array('date' => $date,'time' => $time,'title' => $title,'name' => $name	));
   }
 }
