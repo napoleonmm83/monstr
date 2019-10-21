@@ -42,17 +42,29 @@ $dates5 = array_shift($dates);
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <style>
-
-
-
-      </style>
+    <script>
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+  }
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+  </script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Hello, world!</title>
   </head>
-  <body>
+  <body onload="startTime()">
 
     <div class="container-fluid ">
       <div class="row" style="height:12vh;"  >
@@ -100,6 +112,7 @@ $dates5 = array_shift($dates);
 
     <footer id="sticky-footer" style="height:8vh;" class="py-4 bg-dark text-white-50">
         <div class="container text-center">
+          <div id="txt"></div>
           <small>Copyright &copy; Your Website</small>
         </div>
       </footer>
