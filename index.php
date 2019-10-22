@@ -175,10 +175,24 @@ $class_boring_monster5 = "";
     background-color: #ffe082 !important;
   }
   .button-time {
+    margin-top:5px;
+
   background-color: #cddc39 !important;
   color: #c62828 !important;
-  font-size: 26px !important;;
+  font-size: 20px !important;;
 }
+
+.divider {
+
+color: #fff !important;
+font-size: 26px !important;
+margin-left: 10px;
+margin-right: 10px;
+margin-top: 5px;
+}
+
+
+
   </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -187,8 +201,8 @@ $class_boring_monster5 = "";
   </head>
   <body onload="startTime()">
 
-    <div class="container-fluid ">
-      <div class="row" style="height:12vh;"  >
+    <div class="container-fluid overflow-hidden ">
+      <div class="row" style="height:10vh;padding-bottom:5px;"  >
     <div class="col-sm border headerdate">
       <h1 class="text-center" >Montag</h1>
       <h5 class="text-center" ><?php echo $dates1;  ?></h5>
@@ -212,7 +226,7 @@ $class_boring_monster5 = "";
   </div>
 
 
-  <div style="height:80vh;"class="row">
+  <div style="height:78vh;"class="row">
 <div   class="col-sm border <?php echo $class_boring_monster1;  ?>">
 <?php
 $query = $pdo->prepare("SELECT * FROM event WHERE date = :date");
@@ -221,17 +235,22 @@ $event = $query->fetchAll();
 foreach( $event as $row ) {
 
 $timenow = date("H");
-$timeevent =  date("H", strtotime($row['time']));
-if ($timenow == $timeevent ){
+$timeevent =  date("H", strtotime($row['start_time']));
+if ($timenow == $timeevent && $dates1 == $heute){
   $monstrhappy = "bg-card-active";
 } else {
   $monstrhappy = "";
 }
-echo   "<div class='card text-white bg-card  border-3 mb-2  ".$monstrhappy."  '>\n";
+echo   "<div class='card shadow text-white bg-card  border-3 mb-2  ".$monstrhappy."  '>\n";
 echo   "<div class='card-body'>\n";
-echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
-echo   "<h5 class='card-text'>".$row['name']."</h5>\n";
-echo   " <a href='#' class='btn button-time'>".$row['time']."</a>\n";
+echo   "<a class='card-text'>".$row['title']."</a>\n";
+echo   "<a class='card-text'>-</a>\n";
+echo   "<a class='card-text'>".$row['name']."</a>\n";
+echo   "<div class='row'>\n";
+echo   "<a href='#' class='btn button-time'>".$row['start_time']."</a>\n";
+echo   "<h5 class='divider'>-</h5>\n";
+echo   "<a href='#' class='btn button-time'>".$row['end_time']."</a>\n";
+echo   "</div>\n";
 echo   "</div>\n";
 echo   "</div>\n";
 }
@@ -244,20 +263,25 @@ echo   "</div>\n";
   $event = $query->fetchAll();
   foreach( $event as $row ) {
     $timenow = date("H");
-    $timeevent =  date("H", strtotime($row['time']));
-    if ($timenow == $timeevent ){
+    $timeevent =  date("H", strtotime($row['start_time']));
+    if ($timenow == $timeevent && $dates2 == $heute ){
       $monstrhappy = "bg-card-active";
     } else {
       $monstrhappy = "";
     }
-    echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
+    echo   "<div class='card shadow text-white bg-card  border-3 mb-2  ".$monstrhappy."  '>\n";
     echo   "<div class='card-body'>\n";
-    echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
-    echo   "<h5 class='card-text'>".$row['name']."</h5>\n";
-    echo   " <a href='#' class='btn button-time'>".$row['time']."</a>\n";
+    echo   "<a class='card-text'>".$row['title']."</a>\n";
+    echo   "<a class='card-text'>-</a>\n";
+    echo   "<a class='card-text'>".$row['name']."</a>\n";
+    echo   "<div class='row'>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['start_time']."</a>\n";
+    echo   "<h5 class='divider'>-</h5>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['end_time']."</a>\n";
     echo   "</div>\n";
     echo   "</div>\n";
-  }
+    echo   "</div>\n";
+    }
   ?>
 </div>
 <div class="col-sm border  <?php echo $class_boring_monster3;  ?> ">
@@ -267,20 +291,25 @@ echo   "</div>\n";
   $event = $query->fetchAll();
   foreach( $event as $row ) {
     $timenow = date("H");
-    $timeevent =  date("H", strtotime($row['time']));
-    if ($timenow == $timeevent ){
+    $timeevent =  date("H", strtotime($row['start_time']));
+    if ($timenow == $timeevent && $dates3 == $heute ){
       $monstrhappy = "bg-card-active";
     } else {
       $monstrhappy = "";
     }
-    echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
+    echo   "<div class='card shadow text-white bg-card  border-3 mb-2  ".$monstrhappy."  '>\n";
     echo   "<div class='card-body'>\n";
-    echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
-    echo   "<h5 class='card-text'>".$row['name']."</h5>\n";
-    echo   " <a href='#' class='btn button-time'>".$row['time']."</a>\n";
+    echo   "<a class='card-text'>".$row['title']."</a>\n";
+    echo   "<a class='card-text'>-</a>\n";
+    echo   "<a class='card-text'>".$row['name']."</a>\n";
+    echo   "<div class='row'>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['start_time']."</a>\n";
+    echo   "<h5 class='divider'>-</h5>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['end_time']."</a>\n";
     echo   "</div>\n";
     echo   "</div>\n";
-  }
+    echo   "</div>\n";
+    }
   ?>
 </div>
 <div class="col-sm border  <?php echo $class_boring_monster4;  ?> ">
@@ -290,20 +319,25 @@ echo   "</div>\n";
   $event = $query->fetchAll();
   foreach( $event as $row ) {
     $timenow = date("H");
-    $timeevent =  date("H", strtotime($row['time']));
-    if ($timenow == $timeevent ){
+    $timeevent =  date("H", strtotime($row['start_time']));
+    if ($timenow == $timeevent && $dates4 == $heute ){
       $monstrhappy = "bg-card-active";
     } else {
       $monstrhappy = "";
     }
-    echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
+    echo   "<div class='card shadow text-white bg-card  border-3 mb-2  ".$monstrhappy."  '>\n";
     echo   "<div class='card-body'>\n";
-    echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
-    echo   "<h5 class='card-text'>".$row['name']."</h5>\n";
-    echo   " <a href='#' class='btn button-time'>".$row['time']."</a>\n";
+    echo   "<a class='card-text'>".$row['title']."</a>\n";
+    echo   "<a class='card-text'>-</a>\n";
+    echo   "<a class='card-text'>".$row['name']."</a>\n";
+    echo   "<div class='row'>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['start_time']."</a>\n";
+    echo   "<h5 class='divider'>-</h5>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['end_time']."</a>\n";
     echo   "</div>\n";
     echo   "</div>\n";
-  }
+    echo   "</div>\n";
+    }
   ?>
 </div>
 <div class="col-sm border  <?php echo $class_boring_monster5;  ?>">
@@ -313,36 +347,48 @@ echo   "</div>\n";
   $event = $query->fetchAll();
   foreach( $event as $row ) {
     $timenow = date("H");
-    $timeevent =  date("H", strtotime($row['time']));
-    if ($timenow == $timeevent ){
+    $timeevent =  date("H", strtotime($row['start_time']));
+    if ($timenow == $timeevent && $dates5 == $heute ){
       $monstrhappy = "bg-card-active";
     } else {
       $monstrhappy = "";
     }
-    echo   "<div class='card text-white bg-card  border-3 mb-2'>\n";
+    echo   "<div class='card shadow text-white bg-card  border-3 mb-2  ".$monstrhappy."  '>\n";
     echo   "<div class='card-body'>\n";
-    echo   "<h4 class='card-title'>".$row['title']."</h4>\n";
-    echo   "<h5 class='card-text'>".$row['name']."</h5>\n";
-    echo   " <a href='#' class='btn button-time'>".$row['time']."</a>\n";
+    echo   "<a class='card-text'>".$row['title']."</a>\n";
+    echo   "<a class='card-text'>-</a>\n";
+    echo   "<a class='card-text'>".$row['name']."</a>\n";
+    echo   "<div class='row'>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['start_time']."</a>\n";
+    echo   "<h5 class='divider'>-</h5>\n";
+    echo   "<a href='#' class='btn button-time'>".$row['end_time']."</a>\n";
     echo   "</div>\n";
     echo   "</div>\n";
-  }
+    echo   "</div>\n";
+    }
   ?>
 </div>
 </div>
     </div>
 
-    <footer id="sticky-footer" style="height:8vh;" class="py-4 bg-dark text-white-50">
+
+
+    <footer id="sticky-footer" style="height:12vh;" class="py-4 bg-dark text-white-50">
         <div class="container text-center">
           <div class="row">
-             <div class="col-sm">
+
+             <div class="col-auto mr-auto">
+              <h5>Copyright &copy; www.martini.digital</h5>
+             </div>
+             <div class="col-auto mr-auto">
+              <img src="logo.png" alt="Smiley face" height="85" width="112">
+             </div>
+             <div class="col-auto">
             <h3 style="color:#b2ff59;">  <?php echo $heute;  ?></h3>
+            <h3 style="color:#1e88e5;" id="txt"></h3>
              </div>
-             <div class="col-sm">
-                <h5>Copyright &copy; martini.digital</h5>
-             </div>
-             <div class="col-sm">
-                 <h3 style="color:#1e88e5;" id="txt"></h3>
+             <div class="col-auto">
+
              </div>
            </div>
 
