@@ -168,7 +168,7 @@ margin-top: 5px;
           echo   "<h5 class='divider'>-</h5>\n";
           echo   "<a href='#' class='btn button-time'>".$row['end_time']."</a>\n";
           echo   "</div>\n";
-          echo   "<form action='dashboard.php?delet=event&start=". $start_date."&end=".$end_date."' method='post'>\n";
+          echo   "<form action='dashboard.php?delet=event' method='post'>\n";
           echo   "<div class='row justify-content-center m-3'>\n";
           echo    "<input type='hidden'  name='id' id='id' value='".$row['id']."'>\n";
           echo    "<input type='hidden'  name='start_date'  value='". $start_date."'>\n";
