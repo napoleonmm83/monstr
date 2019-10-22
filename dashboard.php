@@ -1,18 +1,36 @@
 <?php
 require_once ("config.php");
 
+$start_date = date("Y-m-d");
+$end_date =  date('Y-m-d', strtotime($start_date. ' + 30 days'));
+
+$start_date_form = date("d.m.Y", strtotime($start_date));
+$end_date_form  = date("d.m.Y", strtotime($end_date));
+
+
 if(isset($_GET['save'])) {
   $save = $_GET['save'];
   if($save == 'event') {
-    $date = $_POST['date'];
-    $start_time = $_POST['start_time'];
-    $end_time = $_POST['end_time'];
-    $title = $_POST['title'];
-    $name = $_POST['name'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
 
+    $start_date_form = date("d.m.Y", strtotime($start_date));
+    $end_date_form  = date("d.m.Y", strtotime($end_date));
+  }
+}
 
-  $statement = $pdo->prepare("INSERT INTO event (	date, start_time, end_time, title, name) VALUES (:date, :start_time, :end_time, :title, :name)");
-  $result = $statement->execute(array('date' => $date,'start_time' => $start_time,'end_time' => $end_time ,'title' => $title,'name' => $name	));
+if(isset($_GET['delet'])) {
+  $delet = $_GET['delet'];
+  if($delet == 'event') {
+    $id = $_POST['id'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+
+    $start_date_form = date("d.m.Y", strtotime($start_date));
+    $end_date_form  = date("d.m.Y", strtotime($end_date));
+
+    $statement = $pdo->prepare("DELETE FROM event WHERE id = :id ");
+			$result = $statement->execute(array('id' =>  $id ));
   }
 }
 
@@ -56,6 +74,32 @@ if(isset($_GET['save'])) {
 
   color:#ef5350;
 }
+
+.button-time {
+  margin-top:5px;
+
+background-color: #cddc39 !important;
+color: #c62828 !important;
+font-size: 20px !important;
+}
+
+.divider {
+
+color: #fff !important;
+font-size: 26px !important;
+margin-left: 10px;
+margin-right: 10px;
+margin-top: 5px;
+}
+
+.button-delet {
+  background-color: #c62828 !important;
+  color: #cddc39 !important;
+  font-size: 20px !important;
+}
+
+
+
 </style>
     <title>Hello, world!</title>
   </head>
@@ -83,57 +127,62 @@ if(isset($_GET['save'])) {
 
       <body class="d-flex flex-column">
   <div id="page-content">
-    <div class="container text-center">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <h1 style="color:#03a9f4;" class="font-weight-light mt-4 m-md-3  ">Monstr Organizer</h1>
-
-              <div style="background-color:#dce775 ;" class="card shadow">
-                <div class="card-body">
-                <h3 class="label" class="card-title">Event eintragen</h3>
-              <div class="row justify-content-center">
-
-            <div class="col-lg-4  col-sm-4">
-
-              <form action="admin.php?save=event" method="post">
-                <div class="form-group">
-                  <label class="label" for="exampleInputEmail1">Datum</label>
-                  <input type="date" class="form-control" id="date" name="date"  >
-                </div>
-                </div>
-                </div>
-
-                <div class="row justify-content-center">
-                  <div class="col-lg-2  col-sm-2 ">
-        <div class="form-group">
-          <label class="label"  for="exampleInputEmail1">Start Zeit</label>
-          <input type="time" class="form-control" id="start_time" name="start_time"  >
-        </div>
-      </div>
-        <div class="col-lg-2  col-sm-2">
-        <div class="form-group">
-          <label class="label" for="exampleInputEmail1">End Zeit</label>
-          <input type="time" class="form-control" id="end_time" name="end_time"  >
-        </div>
-        </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-6  col-sm-2">
-        <div class="form-group">
-          <label class="label" for="exampleInputPassword1">Titel</label>
-          <input type="text" class="form-control" id="title" name="title" placeholder="Titel">
-        </div>
-        <div class="form-group">
-          <label class="label" for="exampleInputPassword1">Name</label>
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-        </div>
-
-        <button  type="submit" class="btn button-send">Senden</button>
-      </form>
+    <div class="container-fluid text-center">
+        <h1 style="color:#03a9f4;" class="font-weight-light mt-4 m-md-3  ">Monstr Organizer</h1>
+        <h4 style="color:#03a9f4;" class="font-weight-light mt-4 m-md-3  ">Events vom <?php echo $start_date_form. " bis " .$end_date_form  ?></h4>
+      <div class="row justify-content-start">
+        <div class="col-lg-2">
+          <form action="dashboard.php?save=event&start=<?php echo $start_date;?>&end=<?php echo $end_date;?>" method="post">
+            <div class="form-group">
+              <label class="label" for="exampleInputEmail1">Start Datum</label>
+              <input type="date" class="form-control" id="start_date" name="start_date">
             </div>
-      </div>
-    </div>
-        </div>
+            <div class="form-group">
+              <label class="label" for="exampleInputEmail1">End Datum</label>
+              <input type="date" class="form-control" id="end_date" name="end_date"  >
+            </div>
+
+            <button type="submit" class="btn btn-primary m-3">Filtern</button>
+          </form>
+</div>
+<div class="col-lg-10">
+    <div class="row justify-content-start">
+          <?php
+          $query = $pdo->prepare("SELECT * FROM event WHERE date > :start AND date < :end  ");
+          $query->execute(array('start' => $start_date, 'end' => $end_date));
+          $event = $query->fetchAll();
+          foreach( $event as $row ) {
+
+            $dates = $row['date'];
+            $form_dates = date("d.m.Y", strtotime($dates));
+
+          echo   "<div  class='col-lg-2'>\n";
+          echo   "<div style='background-color:#dce775 ;' class='card shadow text-white bg-card  border-3 mb-2    '>\n";
+          echo   "<div class='card-body'>\n";
+          echo   "<h5 class='card-title'>".$form_dates."</h5>\n";
+          echo   "<a class='card-text'>".$row['title']."</a>\n";
+          echo   "<a class='card-text'>-</a>\n";
+          echo   "<a class='card-text'>".$row['name']."</a>\n";
+          echo   "<div class='row justify-content-center'>\n";
+          echo   "<a href='#' class='btn button-time'>".$row['start_time']."</a>\n";
+          echo   "<h5 class='divider'>-</h5>\n";
+          echo   "<a href='#' class='btn button-time'>".$row['end_time']."</a>\n";
+          echo   "</div>\n";
+          echo   "<form action='dashboard.php?delet=event&start=". $start_date."&end=".$end_date."' method='post'>\n";
+          echo   "<div class='row justify-content-center m-3'>\n";
+          echo    "<input type='hidden'  name='id' id='id' value='".$row['id']."'>\n";
+          echo    "<input type='hidden'  name='start_date'  value='". $start_date."'>\n";
+          echo    "<input type='hidden'  name='end_date'  value='".$end_date."'>\n";
+
+          echo   "<button type='submit' class='btn button-delet'>löschen</button>\n";
+          echo   "</div>\n";
+          echo   "</form>\n";
+          echo   "</div>\n";
+          echo   "</div>\n";
+          echo   "</div>\n";
+          }
+          ?>
+          </div>
         </div>
       </div>
     </div>

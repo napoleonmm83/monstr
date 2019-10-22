@@ -104,13 +104,13 @@ if(isset($_GET['save'])) {
                 </div>
 
                 <div class="row justify-content-center">
-                  <div class="col-lg-2  col-sm-2 ">
+                  <div class="col-lg-3  col-sm-2 ">
         <div class="form-group">
           <label class="label"  for="exampleInputEmail1">Start Zeit</label>
           <input type="time" class="form-control" id="start_time" name="start_time"  >
         </div>
       </div>
-        <div class="col-lg-2  col-sm-2">
+        <div class="col-lg-3  col-sm-2">
         <div class="form-group">
           <label class="label" for="exampleInputEmail1">End Zeit</label>
           <input type="time" class="form-control" id="end_time" name="end_time"  >
