@@ -144,7 +144,7 @@ if(isset($_GET['save'])) {
        <h5>Copyright &copy; www.martini.digital</h5>
       </div>
       <div class="col-auto mr-auto">
-       <img src="logo.png" alt="Smiley face" height="85" width="112">
+       <img src="../logo.png" alt="Smiley face" height="85" width="112">
       </div>
     </div>
   </footer>
