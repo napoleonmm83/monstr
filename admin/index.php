@@ -65,7 +65,7 @@ if(isset($_GET['save'])) {
   <!-- Links -->
   <ul  class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="admin.php">Event Editor</a>
+      <a class="nav-link" href="index.php">Event Editor</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="dashboard.php">Eventübersicht</a>
