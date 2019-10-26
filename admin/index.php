@@ -57,7 +57,7 @@ if(isset($_GET['save'])) {
   color:#ef5350;
 }
 </style>
-    <title>Hello, world!</title>
+    <title>Monstr Organizer</title>
   </head>
   <body class="d-flex flex-column">
     <nav style="background-color:#ffe082 ;"  class="navbar navbar-expand-sm ">
@@ -95,7 +95,7 @@ if(isset($_GET['save'])) {
 
             <div class="col-lg-4  col-sm-4">
 
-              <form action="admin.php?save=event" method="post">
+              <form action="index.php?save=event" method="post">
                 <div class="form-group">
                   <label class="label" for="exampleInputEmail1">Datum</label>
                   <input type="date" class="form-control" id="date" name="date"  >

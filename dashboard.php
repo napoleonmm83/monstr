@@ -101,7 +101,7 @@ margin-top: 5px;
 
 
 </style>
-    <title>Hello, world!</title>
+    <title>Monstr Organizer</title>
   </head>
   <body class="d-flex flex-column">
     <nav style="background-color:#ffe082 ;"  class="navbar navbar-expand-sm ">
