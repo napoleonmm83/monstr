@@ -3,51 +3,19 @@ require_once ("config.php");
 
 
 
-
-
-
-
-
-
 $heute = date("d.m.Y");
 
-function GetCurrentWeekDates()
-{
-    if (date('D') != 'Mon') {
-        $startdate = date('d.m.Y', strtotime('last Monday'));
-    } else {
-        $startdate = date('d.m.Y');
-    }
 
-//always next saturday
-    if (date('D') != 'Sat') {
-        $enddate = date('d.m.Y', strtotime('next Saturday'));
-    } else {
-        $enddate = date('d.m.Y');
-    }
-
-    $DateArray = array();
-    $timestamp = strtotime($startdate);
-    while ($startdate <= $enddate) {
-        $startdate = date('d.m.Y', $timestamp);
-        $DateArray[] = $startdate;
-        $timestamp = strtotime('+1 days', strtotime($startdate));
-    }
-    return $DateArray;
-}
-
-
-$dates = GetCurrentWeekDates();
-$dates1 = array_shift($dates);
-$form_dates1 = date("Y-m-d", strtotime($dates1));
-$dates2 = array_shift($dates);
-$form_dates2 = date("Y-m-d", strtotime($dates2));
-$dates3 = array_shift($dates);
-$form_dates3 = date("Y-m-d", strtotime($dates3));
-$dates4 = array_shift($dates);
-$form_dates4 = date("Y-m-d", strtotime($dates4));
-$dates5 = array_shift($dates);
-$form_dates5 = date("Y-m-d", strtotime($dates5));
+$dates1 = date("d.m.Y", strtotime('monday this week'));
+$form_dates1 = date("Y-m-d", strtotime('monday this week'));
+$dates2 = date("d.m.Y", strtotime('tuesday this week'));
+$form_dates2 = date("Y-m-d", strtotime('tuesday this week'));
+$dates3 = date("d.m.Y", strtotime('wednesday this week'));
+$form_dates3 = date("Y-m-d", strtotime('wednesday this week'));
+$dates4 = date("d.m.Y", strtotime('thursday this week'));
+$form_dates4 = date("Y-m-d", strtotime('thursday this week'));
+$dates5 = date("d.m.Y", strtotime('friday this week'));
+$form_dates5 = date("Y-m-d", strtotime('friday this week'));
 
 
 $query = $pdo->prepare("SELECT * FROM event WHERE date = :date");
@@ -191,6 +159,9 @@ margin-right: 10px;
 margin-top: 5px;
 }
 
+p,h1,h2,h3,h4,h5,h6{
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
 
 
   </style>
